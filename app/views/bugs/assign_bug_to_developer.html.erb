@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Userid</th>
+
+    <th></th>
+  </tr>
+ 
+  <% @users.each do |project| %>
+    <tr>
+      <td><%= project.id %></td>
+      <td><%= project.name %></td>
+      <td><%= project.user_type %></td>
+      <td><%= link_to 'Assign Bug', assign_developer_url%> </td>
+    </tr>
+  <% end %>
+</table>

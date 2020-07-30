@@ -1,0 +1,53 @@
+<%if current_user && current_user.projectmanager? %>
+  <p> You are signed in as project manager </p>
+<% elsif current_user && current_user.qa? %>
+  <p> You are signed in as QA </p>
+<%elsif current_user && current_user.developer? %>
+  <p> You are signed in as developer </p>
+<%end %>
+<h1>Listing Articles</h1>
+ 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Userid</th>
+
+    <th></th>
+  </tr>
+
+  <% @projects.each do |project| %>
+    <% if policy(project).qa? || policy(project).pm? %>
+      <tr>
+        <td><%= project.title %></td>
+        <td><%= project.body %></td>
+        <td><%= project.user_id %></td>
+
+        <td><%= link_to 'Show', project_path(project) %></td>
+        <%if current_user && current_user.projectmanager? %>
+
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Destroy', project_path(project),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>    
+        <%end %>
+      </tr>
+    <%end %>
+
+    <% if policy(project).dev? %>
+      <% @projects.each do |project| %>
+        <%if policy(project).developer_show? %>
+          <tr>
+            <td><%= project.title %></td>
+            <td><%= project.body %></td>
+            <td><%= project.user_id %></td>
+            <td><%= link_to 'Show', project_path(project) %></td>
+          </tr>
+        <%end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
+<%if policy(@projects).create? %>
+  <%= link_to 'Add New project', new_project_path %>
+<%end %>

@@ -1,0 +1,27 @@
+<p>
+  <strong>Title:</strong>
+  <%= bug.title%>
+</p>
+ 
+<p>
+  <strong>Description:</strong>
+  <%= bug.body%>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= bug.status? %>
+</p>
+<%if current_user && current_user.projectmanager? %>
+	<form class="form-inline my-2 my-lg-O" action="/assign_bug_to_developer">
+	<!--   <input class="form-control mr-sm-2" type="text" placeholder="Search By Comments"aria-label="Search">
+	 -->  <div style = "width:245px">
+	  <button class="btn btn-online-success my-2 my-sm-O" type="Submit">Search News with comments only </button>
+	  </div>
+	</form>
+<% end %>
+
+<p>
+  <%= link_to 'Destroy Bug', @bug,
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

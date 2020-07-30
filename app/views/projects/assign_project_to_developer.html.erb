@@ -1,0 +1,25 @@
+
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Userid</th>
+
+    <th></th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.user_type %></td>
+      <% if policy(@project).developer_show? %>
+        <td><%= link_to 'Add Developer', add_developer_project_path(@project.id,user_id: user.id)  %></td>
+      <% else %>
+        <td><%= link_to 'Remove Developer', remove_developer_project_path(@project.id,user_id: user.id)  %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</body>

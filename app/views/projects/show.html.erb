@@ -1,0 +1,27 @@
+
+<%if policy(@project).create? %>
+	<%= link_to 'click to add developers', assign_project_to_developer_project_path(@project.id) %>
+<% end %>
+<p>
+  <strong>Title:</strong>
+  <%= @project.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @project.body %>
+</p>
+<p>
+  <strong>User:</strong>
+ 	 <%= @project.user.email.split('@')[0].capitalize %>
+</p>
+
+<h2>Bugs</h2>
+<%= render @project.bugs%>
+ 
+<%if current_user && current_user.qa? %>
+	<h2>Add a Bug:</h2>
+	<%= render 'bugs/form' %>
+<% end%>
+
+<%= link_to 'Back', projects_path %>

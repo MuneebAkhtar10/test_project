@@ -1,27 +1,118 @@
 
-<%if policy(@project).create? %>
-	<%= link_to 'click to add developers', assign_project_to_developer_project_path(@project.id) %>
-<% end %>
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @project.body %>
-</p>
-<p>
-  <strong>User:</strong>
- 	 <%= @project.user.email.split('@')[0].capitalize %>
-</p>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Style the body */
+body {
+  font-family: Arial;
+  margin: 0;
+}
+/* Header/Logo Title */
+.header {
+	margin-top: -20px;
+  padding: 10px;
+  padding-right: 100px; 
+  text-align: right;
+  background:#683181;
+  color: white;
+  font-size: 30px;
+}
+.header a{
+  color: white;
+}
 
-<h2>Bugs</h2>
-<%= render @project.bugs%>
- 
-<%if current_user && current_user.qa? %>
-	<h2>Add a Bug:</h2>
-	<%= render 'bugs/form' %>
-<% end%>
+a:link {
+	color:black;
 
-<%= link_to 'Back', projects_path %>
+}
+.header2 {
+	margin-top: -30px;
+	text-align: left;
+  padding: 10px;
+  background:     #683181    ;
+  color: white;
+  color
+  font-size: 30px;
+}
+/*.button {
+  text-align: center;
+  background-color: #683181;
+  border: 1px;
+  color: white;
+  display: inline-block;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0;
+  position: absolute;
+  top:25%;
+  left: 15%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  cursor: pointer;
+}
+.button a{
+	font-size: 16px;
+  color: white;
+
+}*/
+</style>
+<body>
+
+<div class="header2">
+  <h1>Bugzilla</h1>
+  <p>By Muneeb</p>
+</div>
+
+<div class="header">
+  <% if current_user %>
+    <%= link_to 'Account', edit_user_registration_path  %>
+		<%= link_to 'Sign Out',destroy_user_session_path , method: :delete %>
+	<% else %>
+		<%= link_to "Sign In     ." , new_user_session_path  %>
+    <%= link_to ' Sign Up', new_user_registration_path  %>
+	<%end %>
+</div>
+
+</head>
+
+</body>
+</html>
+
+	<p>
+	  <strong>Title:</strong>
+	  <%= @project.title %>
+	</p>
+	 
+	<p>
+	  <strong>Text:</strong>
+	  <%= @project.body %>
+	</p>
+	<p>
+	  <strong>User:</strong>
+	 	 <%= @project.user.email.split('@')[0].capitalize %>
+	</p>
+	<p> </p>
+	
+	<div class="button">
+		<%if policy(@project).create? %>
+			<%= link_to 'click to add developers', assign_project_to_developer_project_path(@project.id) %>
+		<% end %>
+	</div>
+	
+	<h2>Bugs</h2>
+	<% if @project.bugs %>
+		<%= render @project.bugs%>
+	<% else %>
+		 <h4>No bugs found for this project</h4>
+	<%end%>
+	<%if current_user && current_user.qa? %>
+		<h2>Add a Bug:</h2>
+		<%= render 'bugs/form' %>
+	<% end%>
+
+	<%= link_to 'Back', projects_path %>

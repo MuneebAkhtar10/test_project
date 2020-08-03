@@ -7,21 +7,32 @@
   <strong>Description:</strong>
   <%= bug.body%>
 </p>
+
+<% if bug.image.present? %>
+  <div style = "width:100px; height:70px">
+    <strong>Attachment: </strong>
+    <%= link_to image_tag(bug.image, style: 'width:100%', padding: '200px', margin: '10px'),projects_path %>
+  </div>
+  <%else %>
+    <p>
+      <strong>No Attachment found</strong>
+    </p>
+<% end %>
 <p>
   <strong>Status:</strong>
-  <%= bug.status? %>
+  <%= bug.projectstatus %>
 </p>
-<%if current_user && current_user.projectmanager? %>
-	<form class="form-inline my-2 my-lg-O" action="/assign_bug_to_developer">
-	<!--   <input class="form-control mr-sm-2" type="text" placeholder="Search By Comments"aria-label="Search">
-	 -->  <div style = "width:245px">
-	  <button class="btn btn-online-success my-2 my-sm-O" type="Submit">Search News with comments only </button>
-	  </div>
-	</form>
+
+
+<%if policy(bug).dev? %>
+
+  <%= link_to 'Take Bug', take_bug_developer_path(bug.id,user_id: @user_id, project_id: @project.id)  %>
 <% end %>
 
+<%if policy(@project).qa? %>
 <p>
   <%= link_to 'Destroy Bug', @bug,
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
 </p>
+<% end %>

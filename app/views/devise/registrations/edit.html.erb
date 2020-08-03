@@ -9,11 +9,6 @@
   </div>
 
   <div class="field">
-    <%= f.select :type %><br />
-    <%= f.submit :type %>
-  </div>
-
-  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
@@ -41,6 +36,12 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+   <% class_types = ["projectmanager","qa","developer"] %>
+  <div class ="field">
+    <%= f.label :user_type, 'Role:' %>
+    <%= f.select(:user_type, class_types,{}) %>
+  </div>
+  
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

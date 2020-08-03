@@ -15,60 +15,76 @@ body {
 .header {
 	margin-top: -20px;
   padding: 10px;
+  padding-right: 100px; 
   text-align: right;
-  background: #3CB371;
+  background:#683181;
   color: white;
   font-size: 30px;
 }
+.header a{
+  color: white;
+}
 
 a:link {
-	color:red;
+	color:white;
 
 }
 .header2 {
-	margin-top: -20px;
+	margin-top: -30px;
 	text-align: left;
   padding: 10px;
-  background: #3CB371;
+  background:     #683181    ;
   color: white;
   color
   font-size: 30px;
 }
 .button {
-  background-color: #4CAF50;
-  border: none;
+  text-align: center;
+  background-color: #683181;
+  border: 1px;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  width: 130px;
+   margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+.button a{
+  color: white;
+
 }
 </style>
 <body>
 
 <div class="header2">
-  <h1>Test Project</h1>
+  <h1>Bugzilla</h1>
   <p>By Muneeb</p>
 </div>
 
 <div class="header">
   <% if current_user %>
+    <%= link_to 'Account', edit_user_registration_path  %>
 		<%= link_to 'Sign Out',destroy_user_session_path , method: :delete %>
 	<% else %>
-		<%= link_to 'Sign In', new_user_session_path  %>
+		<%= link_to "Sign In     ." , new_user_session_path  %>
+    <%= link_to ' Sign Up', new_user_registration_path  %>
+
 	<%end %>
-	<%= link_to 'View All Projects', projects_path %>
 </div>
 </head>
 
 </body>
 </html>
-
-<!-- <form class="form-inline my-2 my-lg-O" action="/projects_path">
-  <div style = "width:245px">
-    <button class="btn btn-online-success my-2 my-sm-O" type="Submit">Click to add developers</button>
+<% if current_user %>
+  <div class="button">
+    <%= link_to 'View All Projects', projects_path %>
   </div>
-</form> -->
+<% end %>

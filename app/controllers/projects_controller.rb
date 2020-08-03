@@ -13,9 +13,7 @@ class ProjectsController < ApplicationController
 		  respond_with @projects
   end
 
-  def wge
-  	
-  end
+
   def add_developer
   
   	@user = User.find(params[:user_id])
@@ -30,7 +28,10 @@ class ProjectsController < ApplicationController
   	@user = User.find(params[:user_id])
   	@users = User.where(user_type: :developer)
   	@project = Project.find(params[:id])
-  	@project.users.destroy
+  	userproject = Usersproject.find_by(user_id: @user.id, project_id: @project.id)
+    userproject.destroy if userproject
+    render 'assign_project_to_developer'
+
   end
 
   def assign_project_to_developer

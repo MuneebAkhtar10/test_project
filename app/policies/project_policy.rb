@@ -19,8 +19,15 @@ class ProjectPolicy < ApplicationPolicy
 	  end
 
 	  def find_dev?
+	  	user_is_owner_of_record? && user.developer? 
+
 	  	# project.find(params[:id])
 	  end
+
+		def check_developer?
+			Project.check_developer
+		end
+
 	  def developer_show?
 	  	user_is_owner_of_record?
 	  end

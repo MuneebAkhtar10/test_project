@@ -26,7 +26,7 @@
 
 <%if policy(bug).dev? %>
 
-  <%= link_to 'Take Bug', take_bug_developer_path(bug.id,user_id: @user_id, project_id: @project.id)  %>
+  <%= link_to 'Take Bug', take_bug_developer_path(bug.id,user_id: @user_id)  %>
 <% end %>
 
 <%if policy(@project).qa? %>

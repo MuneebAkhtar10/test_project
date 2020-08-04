@@ -9,8 +9,8 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :usersprojects, dependent: :destroy
 
-  has_many :bug_developers, dependent: :destroy
-  has_many :bugs ,through: :bug_developers
+  # has_many :bug_developers, dependent: :destroy
+  # has_many :bugs ,through: :bug_developers
 
   has_many :bugs, dependent: :destroy
   has_many :users, through: :usersprojects

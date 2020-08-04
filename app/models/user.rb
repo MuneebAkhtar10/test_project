@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :projects
 
-  has_many :bugs ,through: :bug_developers
-  has_many :bug_developers, dependent: :destroy
+  has_many :bugs 
+  # has_many :bug_developers, dependent: :destroy
 
   has_many :usersprojects, dependent: :destroy
   has_many :projects, through: :usersprojects
